@@ -1,13 +1,14 @@
 {
-  "name": "elektro-pro-weboldal",
-  "version": "1.0.0",
-  "description": "Elektro Pro Bt. villanyszerelési weboldal",
+  "name": "elektro-pro-weboldal-admin-fix",
+  "version": "1.1.0",
+  "description": "Elektro Pro Bt. weboldal - JAVÍTOTT admin belépéssel",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",
-    "dev": "python -m http.server 8000"
+    "dev": "python -m http.server 8000",
+    "test": "echo 'Admin tesztelés: Admin/Admin belépés'"
   },
-  "keywords": ["weboldal", "villanyszerelés", "admin", "responsive"],
+  "keywords": ["weboldal", "villanyszerelés", "admin-fix", "responsive"],
   "author": "Elektro Pro Bt.",
   "license": "MIT"
 }
