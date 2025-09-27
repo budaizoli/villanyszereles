@@ -1,14 +1,14 @@
 {
-  "name": "elektro-pro-weboldal-admin-fix",
-  "version": "1.1.0",
-  "description": "Elektro Pro Bt. weboldal - JAVÍTOTT admin belépéssel",
+  "name": "elektro-pro-weboldal-teljes-crud",
+  "version": "2.0.0",
+  "description": "Elektro Pro Bt. weboldal - TELJES CRUD funkcionalitással",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",
     "dev": "python -m http.server 8000",
-    "test": "echo 'Admin tesztelés: Admin/Admin belépés'"
+    "test": "echo 'Admin tesztelés: Admin/Admin → Szolgáltatások/Galéria CRUD'"
   },
-  "keywords": ["weboldal", "villanyszerelés", "admin-fix", "responsive"],
+  "keywords": ["weboldal", "villanyszerelés", "crud", "admin", "responsive"],
   "author": "Elektro Pro Bt.",
   "license": "MIT"
 }

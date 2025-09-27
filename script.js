@@ -1,13 +1,17 @@
-// Elektro Pro Bt. - Javított JavaScript (Admin belépés garantáltan működik!)
+// Elektro Pro Bt. - TELJES CRUD FUNKCIONALITÁSÚ JavaScript
 
-// Globális változók és állapot
+// Globális változók
 let currentUser = null;
 let currentPage = 'home';
 let currentAdminSection = 'dashboard';
+let servicesData = [];
+let galleryData = [];
+let contactData = {};
+let settingsData = {};
 
 // Alkalmazás inicializálása
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Elektro Pro App inicializálása...');
+    console.log('🚀 Elektro Pro App inicializálása - TELJES CRUD verzió...');
 
     // Loading screen elrejtése
     setTimeout(() => {
@@ -24,10 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listenerek beállítása
     setupEventListeners();
 
+    // UI betöltése adatokkal
+    loadAllData();
+
     // Kezdeti oldal betöltése
     navigateToPage('home');
 
-    console.log('✅ App sikeresen inicializálva');
+    console.log('✅ App sikeresen inicializálva - TELJES CRUD funkcionalitással');
     console.log('📋 Admin belépés: Admin/Admin');
 });
 
@@ -35,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeLocalStorage() {
     console.log('📦 LocalStorage inicializálása...');
 
-    // Admin felhasználó (garantált létrehozás)
+    // Admin felhasználó
     const adminData = {
         username: 'Admin',
         password: 'Admin',
@@ -47,30 +54,158 @@ function initializeLocalStorage() {
 
     // Beállítások
     if (!localStorage.getItem('elektro_settings')) {
-        const settings = {
+        settingsData = {
             companyName: 'Elektro Pro Bt.',
             heroTitle: 'Professzionális villanyszerelési szolgáltatások',
-            heroDescription: 'Megbízható, szakszerű villanyszerelési munkák magánszemélyek és vállalkozások számára.',
+            heroDescription: 'Megbízható, szakszerű villanyszerelési munkák magánszemélyek és vállalkozások számára. Modern technológiák, megfizethető árak.',
             primaryColor: '#2563eb',
             secondaryColor: '#1e40af'
         };
-        localStorage.setItem('elektro_settings', JSON.stringify(settings));
+        localStorage.setItem('elektro_settings', JSON.stringify(settingsData));
         console.log('⚙️ Beállítások létrehozva');
     }
 
     // Kapcsolati adatok
     if (!localStorage.getItem('elektro_contact')) {
-        const contact = {
+        contactData = {
             phone: '+36 30 123 4567',
             email: 'info@elektropro.hu',
             address: '1055 Budapest, Kossuth Lajos tér 12.',
             hours: 'Hétfő-Péntek: 8:00-18:00'
         };
-        localStorage.setItem('elektro_contact', JSON.stringify(contact));
+        localStorage.setItem('elektro_contact', JSON.stringify(contactData));
         console.log('📞 Kapcsolati adatok létrehozva');
     }
 
+    // Szolgáltatások
+    if (!localStorage.getItem('elektro_services')) {
+        servicesData = [
+            {
+                id: 1,
+                name: 'Lakások teljes átvezetékelése',
+                short: 'Komplett lakás villamos hálózat megújítása',
+                description: 'Teljes körű lakás átvezetékelés a legmodernebb szabványok szerint. Új vezetékek fektetése, elosztó cseréje, minden villamos szerelvény modernizálása. Megfelelünk a 2024-es MSZ szabványoknak és garantáljuk a biztonságos üzemeltetést.',
+                icon: '🏠',
+                price: 'Árajánlat egyedi igények alapján',
+                duration: '3-7 nap lakás méretétől függően'
+            },
+            {
+                id: 2,
+                name: 'Lakáselosztó kicserélése/létesítése',
+                short: 'Biztonságos, modern elosztók telepítése',
+                description: 'Régi, elavult elosztók cseréje korszerű, biztonságos megoldásokra. FI-védelem, túláramvédelem és megfelelő címkézés biztosítása. Minden elosztó egyedi tervezés alapján készül.',
+                icon: '📋',
+                price: '45.000 - 120.000 Ft',
+                duration: '1-2 nap'
+            },
+            {
+                id: 3,
+                name: 'Kisebb munkák és javítások',
+                short: 'Gyors villanyszerelési szolgáltatások',
+                description: 'Gyors és megbízható kisebb villanyszerelési munkák. Konnektorok, kapcsolók, lámpák szerelése és javítása. Hibaelhárítás és rendszeres karbantartás magánszemélyek és irodák számára.',
+                icon: '🔧',
+                price: '8.000 - 25.000 Ft',
+                duration: '2-4 óra'
+            }
+        ];
+        localStorage.setItem('elektro_services', JSON.stringify(servicesData));
+        console.log('🛠️ Szolgáltatások létrehozva');
+    }
+
+    // Galéria
+    if (!localStorage.getItem('elektro_gallery')) {
+        galleryData = [
+            {
+                id: 1,
+                title: 'Modern lakáselosztó',
+                description: 'Új, biztonságos lakáselosztó FI-relékkel és automatákkal',
+                category: 'elosztok',
+                project: 'XIII. kerületi lakás felújítás',
+                icon: '⚡'
+            },
+            {
+                id: 2,
+                title: 'Teljes átvezetékelés',
+                description: '60 m² lakás komplett villamos hálózatának megújítása',
+                category: 'atvezetekeles',
+                project: 'Panellakás modernizáció',
+                icon: '🔌'
+            },
+            {
+                id: 3,
+                title: 'Design kapcsolók',
+                description: 'Modern, minőségi kapcsolók és konnektorok szerelése',
+                category: 'szerelveny',
+                project: 'Irodaház felújítás',
+                icon: '💡'
+            },
+            {
+                id: 4,
+                title: 'Kültéri világítás',
+                description: 'Kerti világítás és kültéri elosztó kialakítása',
+                category: 'kulteri',
+                project: 'Családi ház - kert világítás',
+                icon: '🌟'
+            },
+            {
+                id: 5,
+                title: 'Ipari elektromos munkák',
+                description: 'Nagyobb teljesítményű ipari kapcsolások és motorindítók',
+                category: 'ipari',
+                project: 'Műhely elektromos felszerelése',
+                icon: '🏭'
+            },
+            {
+                id: 6,
+                title: 'Sürgős hibaelhárítás',
+                description: 'Villamos hibák gyors és hatékony elhárítása',
+                category: 'hibas',
+                project: '24/7 ügyeleti szolgáltatás',
+                icon: '🚨'
+            }
+        ];
+        localStorage.setItem('elektro_gallery', JSON.stringify(galleryData));
+        console.log('🖼️ Galéria létrehozva');
+    }
+
     console.log('✅ LocalStorage inicializálva');
+}
+
+// Összes adat betöltése LocalStorage-ből
+function loadAllData() {
+    console.log('📊 Adatok betöltése LocalStorage-ből...');
+
+    try {
+        settingsData = JSON.parse(localStorage.getItem('elektro_settings') || '{}');
+        contactData = JSON.parse(localStorage.getItem('elektro_contact') || '{}');
+        servicesData = JSON.parse(localStorage.getItem('elektro_services') || '[]');
+        galleryData = JSON.parse(localStorage.getItem('elektro_gallery') || '[]');
+
+        console.log('✅ Adatok betöltve:', {
+            services: servicesData.length,
+            gallery: galleryData.length,
+            settings: Object.keys(settingsData).length,
+            contact: Object.keys(contactData).length
+        });
+
+        // UI frissítése betöltött adatokkal
+        updateAllUI();
+
+    } catch (error) {
+        console.error('❌ Hiba az adatok betöltése során:', error);
+        showAlert('Hiba az adatok betöltése során!', 'error');
+    }
+}
+
+// Teljes UI frissítése
+function updateAllUI() {
+    console.log('🔄 UI frissítése...');
+
+    updateServicesUI();
+    updateGalleryUI();
+    updateContactUI();
+    updateSettingsUI();
+    updateStats();
 }
 
 // Event listenerek beállítása
@@ -82,7 +217,6 @@ function setupEventListeners() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const page = this.getAttribute('data-page') || this.getAttribute('href').replace('#', '');
-            console.log('🔄 Navigáció:', page);
             navigateToPage(page);
         });
     });
@@ -95,7 +229,6 @@ function setupEventListeners() {
         navToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
-            console.log('📱 Mobile menü toggled');
         });
     }
 
@@ -105,16 +238,13 @@ function setupEventListeners() {
         heroContactBtn.addEventListener('click', () => navigateToPage('contact'));
     }
 
-    // ADMIN FORM EVENT LISTENER - KRITIKUS RÉSZ!
+    // Admin form event listener
     const adminForm = document.querySelector('.admin-login-form');
     if (adminForm) {
         adminForm.addEventListener('submit', function(e) {
-            console.log('🔐 Admin form submitted');
             adminLogin(e);
         });
         console.log('✅ Admin form listener beállítva');
-    } else {
-        console.error('❌ Admin form nem található!');
     }
 
     // Admin navigation linkek
@@ -136,27 +266,471 @@ function setupEventListeners() {
     console.log('✅ Event listenerek beállítva');
 }
 
+// SZOLGÁLTATÁSOK CRUD FUNKCIÓK
+
+// Szolgáltatások UI frissítése
+function updateServicesUI() {
+    console.log('🛠️ Szolgáltatások UI frissítése...');
+
+    // Főoldal szolgáltatások előnézet
+    const servicesPreviewGrid = document.getElementById('services-preview-grid');
+    if (servicesPreviewGrid) {
+        servicesPreviewGrid.innerHTML = servicesData.map(service => `
+            <div class="service-card">
+                <div class="service-icon">${service.icon || '🔧'}</div>
+                <h3>${service.name}</h3>
+                <p>${service.short}</p>
+                <div class="service-price">${service.price || 'Árajánlat kérésre'}</div>
+            </div>
+        `).join('');
+    }
+
+    // Szolgáltatások oldal
+    const servicesDetailed = document.getElementById('services-detailed');
+    if (servicesDetailed) {
+        servicesDetailed.innerHTML = servicesData.map(service => `
+            <div class="service-detailed">
+                <div class="service-header">
+                    <div class="service-icon-large">${service.icon || '🔧'}</div>
+                    <div>
+                        <h2>${service.name}</h2>
+                        <p class="service-subtitle">${service.short}</p>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <p>${service.description}</p>
+                    <div class="service-info">
+                        <div class="info-item">
+                            <strong>Időtartam:</strong> ${service.duration || 'Egyedi'}
+                        </div>
+                        <div class="info-item">
+                            <strong>Ár:</strong> ${service.price || 'Árajánlat kérésre'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Footer szolgáltatások lista
+    const footerServicesList = document.getElementById('footer-services-list');
+    if (footerServicesList) {
+        footerServicesList.innerHTML = servicesData.map(service => 
+            `<li>${service.name}</li>`
+        ).join('');
+    }
+
+    // Admin szolgáltatások lista
+    updateAdminServicesList();
+}
+
+// Admin szolgáltatások lista frissítése
+function updateAdminServicesList() {
+    const servicesList = document.getElementById('services-list');
+    if (!servicesList) return;
+
+    servicesList.innerHTML = servicesData.map(service => `
+        <div class="admin-list-item">
+            <div class="admin-item-content">
+                <div class="admin-item-icon">${service.icon || '🔧'}</div>
+                <div class="admin-item-info">
+                    <h4>${service.name}</h4>
+                    <p>${service.short}</p>
+                    <small>Ár: ${service.price || 'Nincs megadva'} | Időtartam: ${service.duration || 'Nincs megadva'}</small>
+                </div>
+            </div>
+            <div class="admin-item-actions">
+                <button class="btn btn-sm btn-outline" onclick="editService(${service.id})">Szerkesztés</button>
+                <button class="btn btn-sm btn-error" onclick="deleteService(${service.id})">Törlés</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Új szolgáltatás form megjelenítése
+function showAddServiceForm() {
+    const formContainer = document.getElementById('service-form-container');
+    const formTitle = document.getElementById('service-form-title');
+    const form = document.getElementById('service-form');
+
+    formTitle.textContent = 'Új szolgáltatás hozzáadása';
+    form.reset();
+    document.getElementById('service-id').value = '';
+    formContainer.style.display = 'block';
+
+    // Scroll to form
+    formContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Szolgáltatás szerkesztése
+function editService(id) {
+    const service = servicesData.find(s => s.id === id);
+    if (!service) return;
+
+    const formContainer = document.getElementById('service-form-container');
+    const formTitle = document.getElementById('service-form-title');
+
+    formTitle.textContent = 'Szolgáltatás szerkesztése';
+    document.getElementById('service-id').value = service.id;
+    document.getElementById('service-name').value = service.name;
+    document.getElementById('service-short').value = service.short;
+    document.getElementById('service-description').value = service.description;
+    document.getElementById('service-icon').value = service.icon || '';
+    document.getElementById('service-price').value = service.price || '';
+    document.getElementById('service-duration').value = service.duration || '';
+
+    formContainer.style.display = 'block';
+    formContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Szolgáltatás mentése
+function saveService() {
+    const id = document.getElementById('service-id').value;
+    const name = document.getElementById('service-name').value.trim();
+    const short = document.getElementById('service-short').value.trim();
+    const description = document.getElementById('service-description').value.trim();
+    const icon = document.getElementById('service-icon').value.trim();
+    const price = document.getElementById('service-price').value.trim();
+    const duration = document.getElementById('service-duration').value.trim();
+
+    if (!name || !short || !description) {
+        showAlert('Kérjük, töltse ki a kötelező mezőket!', 'error');
+        return;
+    }
+
+    const serviceData = {
+        name,
+        short,
+        description,
+        icon: icon || '🔧',
+        price: price || 'Árajánlat kérésre',
+        duration: duration || 'Egyedi'
+    };
+
+    if (id) {
+        // Szerkesztés
+        const index = servicesData.findIndex(s => s.id === parseInt(id));
+        if (index !== -1) {
+            servicesData[index] = { ...servicesData[index], ...serviceData };
+            console.log('✅ Szolgáltatás frissítve:', name);
+        }
+    } else {
+        // Új hozzáadása
+        const newId = Math.max(...servicesData.map(s => s.id), 0) + 1;
+        servicesData.push({ id: newId, ...serviceData });
+        console.log('✅ Új szolgáltatás hozzáadva:', name);
+    }
+
+    // Mentés LocalStorage-be
+    localStorage.setItem('elektro_services', JSON.stringify(servicesData));
+
+    // UI frissítése
+    updateServicesUI();
+    updateStats();
+
+    // Form elrejtése
+    cancelServiceEdit();
+
+    showAlert('Szolgáltatás sikeresen mentve!', 'success');
+}
+
+// Szolgáltatás szerkesztés megszakítása
+function cancelServiceEdit() {
+    const formContainer = document.getElementById('service-form-container');
+    formContainer.style.display = 'none';
+    document.getElementById('service-form').reset();
+}
+
+// Szolgáltatás törlése
+function deleteService(id) {
+    const service = servicesData.find(s => s.id === id);
+    if (!service) return;
+
+    if (confirm(`Biztosan törli a "${service.name}" szolgáltatást?`)) {
+        servicesData = servicesData.filter(s => s.id !== id);
+        localStorage.setItem('elektro_services', JSON.stringify(servicesData));
+
+        updateServicesUI();
+        updateStats();
+
+        showAlert('Szolgáltatás sikeresen törölve!', 'success');
+        console.log('🗑️ Szolgáltatás törölve:', service.name);
+    }
+}
+
+// GALÉRIA CRUD FUNKCIÓK
+
+// Galéria UI frissítése
+function updateGalleryUI() {
+    console.log('🖼️ Galéria UI frissítése...');
+
+    // Főoldal galéria előnézet
+    const galleryPreviewGrid = document.getElementById('gallery-preview-grid');
+    if (galleryPreviewGrid) {
+        const previewItems = galleryData.slice(0, 4); // Első 4 elem
+        galleryPreviewGrid.innerHTML = previewItems.map(item => `
+            <div class="gallery-item" onclick="openLightbox('', '${item.title}', '${item.description}')">
+                <div class="gallery-placeholder">
+                    <div class="gallery-icon">${item.icon || '⚡'}</div>
+                    <span>${item.title}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Galéria oldal
+    const galleryFull = document.getElementById('gallery-full');
+    if (galleryFull) {
+        galleryFull.innerHTML = galleryData.map(item => `
+            <div class="gallery-item" onclick="openLightbox('', '${item.title}', '${item.description} - ${item.project || ''}')">
+                <div class="gallery-placeholder">
+                    <div class="gallery-icon">${item.icon || '⚡'}</div>
+                    <div class="gallery-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.project || item.category}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Admin galéria lista
+    updateAdminGalleryList();
+}
+
+// Admin galéria lista frissítése
+function updateAdminGalleryList() {
+    const galleryList = document.getElementById('gallery-list');
+    if (!galleryList) return;
+
+    galleryList.innerHTML = galleryData.map(item => `
+        <div class="admin-list-item gallery-item-admin">
+            <div class="admin-item-content">
+                <div class="admin-item-icon">${item.icon || '⚡'}</div>
+                <div class="admin-item-info">
+                    <h4>${item.title}</h4>
+                    <p>${item.description}</p>
+                    <small>Kategória: ${item.category || 'Nincs'} | Projekt: ${item.project || 'Nincs megadva'}</small>
+                </div>
+            </div>
+            <div class="admin-item-actions">
+                <button class="btn btn-sm btn-outline" onclick="editGalleryItem(${item.id})">Szerkesztés</button>
+                <button class="btn btn-sm btn-error" onclick="deleteGalleryItem(${item.id})">Törlés</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Új galéria elem form megjelenítése
+function showAddGalleryForm() {
+    const formContainer = document.getElementById('gallery-form-container');
+    const formTitle = document.getElementById('gallery-form-title');
+    const form = document.getElementById('gallery-form');
+
+    formTitle.textContent = 'Új kép hozzáadása';
+    form.reset();
+    document.getElementById('gallery-id').value = '';
+    formContainer.style.display = 'block';
+
+    formContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Galéria elem szerkesztése
+function editGalleryItem(id) {
+    const item = galleryData.find(g => g.id === id);
+    if (!item) return;
+
+    const formContainer = document.getElementById('gallery-form-container');
+    const formTitle = document.getElementById('gallery-form-title');
+
+    formTitle.textContent = 'Kép szerkesztése';
+    document.getElementById('gallery-id').value = item.id;
+    document.getElementById('gallery-title').value = item.title;
+    document.getElementById('gallery-description').value = item.description;
+    document.getElementById('gallery-category').value = item.category || 'elosztok';
+    document.getElementById('gallery-icon').value = item.icon || '';
+    document.getElementById('gallery-project').value = item.project || '';
+
+    formContainer.style.display = 'block';
+    formContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Galéria elem mentése
+function saveGalleryItem() {
+    const id = document.getElementById('gallery-id').value;
+    const title = document.getElementById('gallery-title').value.trim();
+    const description = document.getElementById('gallery-description').value.trim();
+    const category = document.getElementById('gallery-category').value;
+    const icon = document.getElementById('gallery-icon').value.trim();
+    const project = document.getElementById('gallery-project').value.trim();
+
+    if (!title || !description) {
+        showAlert('Kérjük, töltse ki a kötelező mezőket!', 'error');
+        return;
+    }
+
+    const galleryItemData = {
+        title,
+        description,
+        category: category || 'elosztok',
+        icon: icon || '⚡',
+        project: project || ''
+    };
+
+    if (id) {
+        // Szerkesztés
+        const index = galleryData.findIndex(g => g.id === parseInt(id));
+        if (index !== -1) {
+            galleryData[index] = { ...galleryData[index], ...galleryItemData };
+            console.log('✅ Galéria elem frissítve:', title);
+        }
+    } else {
+        // Új hozzáadása
+        const newId = Math.max(...galleryData.map(g => g.id), 0) + 1;
+        galleryData.push({ id: newId, ...galleryItemData });
+        console.log('✅ Új galéria elem hozzáadva:', title);
+    }
+
+    // Mentés LocalStorage-be
+    localStorage.setItem('elektro_gallery', JSON.stringify(galleryData));
+
+    // UI frissítése
+    updateGalleryUI();
+    updateStats();
+
+    // Form elrejtése
+    cancelGalleryEdit();
+
+    showAlert('Galéria elem sikeresen mentve!', 'success');
+}
+
+// Galéria szerkesztés megszakítása
+function cancelGalleryEdit() {
+    const formContainer = document.getElementById('gallery-form-container');
+    formContainer.style.display = 'none';
+    document.getElementById('gallery-form').reset();
+}
+
+// Galéria elem törlése
+function deleteGalleryItem(id) {
+    const item = galleryData.find(g => g.id === id);
+    if (!item) return;
+
+    if (confirm(`Biztosan törli a "${item.title}" képet?`)) {
+        galleryData = galleryData.filter(g => g.id !== id);
+        localStorage.setItem('elektro_gallery', JSON.stringify(galleryData));
+
+        updateGalleryUI();
+        updateStats();
+
+        showAlert('Galéria elem sikeresen törölve!', 'success');
+        console.log('🗑️ Galéria elem törölve:', item.title);
+    }
+}
+
+// KAPCSOLAT ÉS BEÁLLÍTÁSOK FUNKCIÓK
+
+// Kapcsolat UI frissítése
+function updateContactUI() {
+    // Főoldal kapcsolat
+    const phoneDisplay = document.getElementById('contact-phone-display');
+    const emailDisplay = document.getElementById('contact-email-display');
+    const addressDisplay = document.getElementById('contact-address-display');
+
+    if (phoneDisplay) phoneDisplay.textContent = contactData.phone || '+36 30 123 4567';
+    if (emailDisplay) emailDisplay.textContent = contactData.email || 'info@elektropro.hu';
+    if (addressDisplay) addressDisplay.textContent = contactData.address || '1055 Budapest, Kossuth Lajos tér 12.';
+
+    // Kapcsolat oldal
+    const phoneFull = document.getElementById('contact-phone-full');
+    const emailFull = document.getElementById('contact-email-full');
+    const addressFull = document.getElementById('contact-address-full');
+
+    if (phoneFull) phoneFull.textContent = contactData.phone || '+36 30 123 4567';
+    if (emailFull) emailFull.textContent = contactData.email || 'info@elektropro.hu';
+    if (addressFull) addressFull.innerHTML = (contactData.address || '1055 Budapest, Kossuth Lajos tér 12.').replace(', ', '<br>');
+
+    // Footer
+    const footerPhone = document.getElementById('footer-phone');
+    const footerEmail = document.getElementById('footer-email');
+    const footerAddress = document.getElementById('footer-address');
+
+    if (footerPhone) footerPhone.textContent = '📞 ' + (contactData.phone || '+36 30 123 4567');
+    if (footerEmail) footerEmail.textContent = '📧 ' + (contactData.email || 'info@elektropro.hu');
+    if (footerAddress) footerAddress.textContent = '📍 ' + (contactData.address || 'Budapest, Kossuth Lajos tér 12.');
+
+    // Admin form mezők
+    const phoneInput = document.getElementById('contact-phone-input');
+    const emailInput = document.getElementById('contact-email-input');
+    const addressInput = document.getElementById('contact-address-input');
+
+    if (phoneInput) phoneInput.value = contactData.phone || '+36 30 123 4567';
+    if (emailInput) emailInput.value = contactData.email || 'info@elektropro.hu';
+    if (addressInput) addressInput.value = contactData.address || '1055 Budapest, Kossuth Lajos tér 12.';
+}
+
+// Beállítások UI frissítése
+function updateSettingsUI() {
+    // Vállalat név frissítése
+    const companyNames = document.querySelectorAll('.company-name');
+    companyNames.forEach(el => {
+        if (el) el.textContent = settingsData.companyName || 'Elektro Pro Bt.';
+    });
+
+    // Hero szövegek
+    const heroTitle = document.querySelector('.hero-title');
+    const heroDescription = document.querySelector('.hero-description');
+
+    if (heroTitle) heroTitle.textContent = settingsData.heroTitle || 'Professzionális villanyszerelési szolgáltatások';
+    if (heroDescription) heroDescription.textContent = settingsData.heroDescription || 'Megbízható, szakszerű villanyszerelési munkák.';
+
+    // Admin form mezők
+    const companyNameInput = document.getElementById('company-name-input');
+    const heroTitleInput = document.getElementById('hero-title-input');
+    const heroDescInput = document.getElementById('hero-description-input');
+    const primaryColorInput = document.getElementById('primary-color-input');
+    const secondaryColorInput = document.getElementById('secondary-color-input');
+
+    if (companyNameInput) companyNameInput.value = settingsData.companyName || 'Elektro Pro Bt.';
+    if (heroTitleInput) heroTitleInput.value = settingsData.heroTitle || 'Professzionális villanyszerelési szolgáltatások';
+    if (heroDescInput) heroDescInput.value = settingsData.heroDescription || 'Megbízható, szakszerű villanyszerelési munkák.';
+    if (primaryColorInput) primaryColorInput.value = settingsData.primaryColor || '#2563eb';
+    if (secondaryColorInput) secondaryColorInput.value = settingsData.secondaryColor || '#1e40af';
+
+    // CSS változók alkalmazása
+    if (settingsData.primaryColor) {
+        document.documentElement.style.setProperty('--primary-color', settingsData.primaryColor);
+    }
+    if (settingsData.secondaryColor) {
+        document.documentElement.style.setProperty('--secondary-color', settingsData.secondaryColor);
+    }
+}
+
+// Statisztikák frissítése
+function updateStats() {
+    const servicesCount = document.getElementById('services-count');
+    const galleryCount = document.getElementById('gallery-count');
+
+    if (servicesCount) servicesCount.textContent = servicesData.length;
+    if (galleryCount) galleryCount.textContent = galleryData.length;
+}
+
+// ADMIN CORE FUNKCIÓK
+
 // Oldal navigáció
 function navigateToPage(page) {
     console.log('📄 Oldal váltás:', page);
 
-    // Minden oldal elrejtése
     document.querySelectorAll('.page').forEach(p => {
         p.classList.remove('active');
     });
 
-    // Céloldal megjelenítése
     const targetPage = document.getElementById(page);
     if (targetPage) {
         targetPage.classList.add('active');
         currentPage = page;
-        console.log('✅ Oldal aktív:', page);
-    } else {
-        console.error('❌ Oldal nem található:', page);
-        return;
     }
 
-    // Navigation aktív állapot
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
@@ -168,12 +742,10 @@ function navigateToPage(page) {
         }
     });
 
-    // Admin oldal speciális kezelése
     if (page === 'admin') {
         handleAdminPage();
     }
 
-    // Scroll top + mobile menü bezárása
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const navMenu = document.getElementById('nav-menu');
@@ -196,7 +768,6 @@ function handleAdminPage() {
         return;
     }
 
-    // Ellenőrizzük a bejelentkezési státuszt
     const currentUserData = localStorage.getItem('elektro_current_user');
 
     if (currentUserData) {
@@ -205,46 +776,36 @@ function handleAdminPage() {
         adminLogin.style.display = 'none';
         adminDashboard.style.display = 'flex';
         showAdminSection('dashboard');
+        updateStats();
     } else {
         console.log('🔓 Nincs bejelentkezve, login megjelenítése');
         adminLogin.style.display = 'flex';
         adminDashboard.style.display = 'none';
 
-        // Auto-fill demo értékekkel (fejlesztés során)
         const usernameInput = document.getElementById('admin-username');
         const passwordInput = document.getElementById('admin-password');
         if (usernameInput && passwordInput) {
             usernameInput.value = 'Admin';
             passwordInput.value = 'Admin';
-            console.log('📝 Demo adatok auto-fill');
         }
     }
 }
 
-// ADMIN BELÉPÉS - JAVÍTOTT VERZIÓ
+// Admin belépés
 function adminLogin(event) {
     event.preventDefault();
     console.log('🔐 Admin belépés kezdése...');
 
-    // Form adatok lekérése
     const username = document.getElementById('admin-username').value.trim();
     const password = document.getElementById('admin-password').value.trim();
 
-    console.log('👤 Megadott felhasználó:', username);
-    console.log('🔑 Jelszó hossza:', password.length);
-
-    // Validáció
     if (!username || !password) {
         showAlert('Kérjük, adja meg a felhasználónevet és jelszót!', 'error');
         return;
     }
 
-    // Admin adatok lekérése LocalStorage-ből
     const adminDataString = localStorage.getItem('elektro_admin');
-    console.log('📦 Admin adat string:', adminDataString ? 'létezik' : 'nem létezik');
-
     if (!adminDataString) {
-        console.error('❌ Admin adatok nem találhatók!');
         showAlert('Rendszerhiba: Admin adatok nem találhatók!', 'error');
         return;
     }
@@ -252,18 +813,14 @@ function adminLogin(event) {
     let adminUser;
     try {
         adminUser = JSON.parse(adminDataString);
-        console.log('✅ Admin adatok betöltve:', adminUser.username);
     } catch (error) {
-        console.error('❌ Admin adat parsing hiba:', error);
         showAlert('Rendszerhiba: Admin adatok sérültek!', 'error');
         return;
     }
 
-    // Hitelesítés
     if (username === adminUser.username && password === adminUser.password) {
         console.log('✅ Sikeres hitelesítés!');
 
-        // Bejelentkezési adatok mentése
         const sessionData = {
             username: adminUser.username,
             role: adminUser.role,
@@ -273,21 +830,14 @@ function adminLogin(event) {
         localStorage.setItem('elektro_current_user', JSON.stringify(sessionData));
         currentUser = sessionData;
 
-        // UI frissítése
         handleAdminPage();
-
-        // Sikeres belépés üzenet
         showAlert('Sikeres bejelentkezés! Üdvözöljük az admin panelben.', 'success');
 
         console.log('🎉 Admin belépés sikeres!');
     } else {
         console.log('❌ Hibás hitelesítési adatok');
-        console.log('Várt:', adminUser.username, '/', adminUser.password);
-        console.log('Kapott:', username, '/', password);
-
         showAlert('Hibás felhasználónév vagy jelszó!', 'error');
 
-        // Form reset
         document.getElementById('admin-username').value = '';
         document.getElementById('admin-password').value = '';
         document.getElementById('admin-username').focus();
@@ -303,30 +853,29 @@ function adminLogout() {
 
     navigateToPage('home');
     showAlert('Sikeres kijelentkezés!', 'info');
-
-    console.log('✅ Kijelentkezés befejezve');
 }
 
 // Admin szekciók megjelenítése
 function showAdminSection(section) {
     console.log('📊 Admin szekció váltás:', section);
 
-    // Minden szekció elrejtése
     document.querySelectorAll('.admin-section').forEach(s => {
         s.classList.remove('active');
     });
 
-    // Célszekció megjelenítése
     const targetSection = document.getElementById('admin-' + section + '-section');
     if (targetSection) {
         targetSection.classList.add('active');
         currentAdminSection = section;
-        console.log('✅ Admin szekció aktív:', section);
-    } else {
-        console.error('❌ Admin szekció nem található:', section);
+
+        // Szekció specifikus inicializálás
+        if (section === 'services') {
+            updateAdminServicesList();
+        } else if (section === 'gallery') {
+            updateAdminGalleryList();
+        }
     }
 
-    // Navigation aktív állapot
     document.querySelectorAll('.admin-nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('data-section') === section) {
@@ -335,20 +884,16 @@ function showAdminSection(section) {
     });
 }
 
+// EGYÉB FUNKCIÓK
+
 // Lightbox funkciók
 function openLightbox(imageSrc, title, description) {
-    console.log('🖼️ Lightbox megnyitása:', title);
-
     const lightbox = document.getElementById('lightbox');
     const lightboxTitle = document.getElementById('lightbox-title');
     const lightboxDescription = document.getElementById('lightbox-description');
 
-    if (!lightbox) {
-        console.error('❌ Lightbox nem található!');
-        return;
-    }
+    if (!lightbox) return;
 
-    // Placeholder tartalom (mivel nincs valódi kép)
     let placeholder = lightbox.querySelector('.lightbox-placeholder');
     if (!placeholder) {
         placeholder = document.createElement('div');
@@ -398,73 +943,64 @@ function submitContactForm(event) {
     }
 
     console.log('📋 Form adatok:', data);
-
-    // Szimuláció: email küldés
     showAlert('Köszönjük üzenetét! 24 órán belül felvesszük Önnel a kapcsolatot.', 'success');
     event.target.reset();
 }
 
-// Admin funkciók
+// Admin mentési funkciók
 function saveContent() {
     console.log('💾 Tartalom mentése...');
-
-    const settings = JSON.parse(localStorage.getItem('elektro_settings') || '{}');
 
     const companyNameInput = document.getElementById('company-name-input');
     const heroTitleInput = document.getElementById('hero-title-input');
     const heroDescInput = document.getElementById('hero-description-input');
 
-    if (companyNameInput) settings.companyName = companyNameInput.value;
-    if (heroTitleInput) settings.heroTitle = heroTitleInput.value;
-    if (heroDescInput) settings.heroDescription = heroDescInput.value;
+    if (companyNameInput) settingsData.companyName = companyNameInput.value;
+    if (heroTitleInput) settingsData.heroTitle = heroTitleInput.value;
+    if (heroDescInput) settingsData.heroDescription = heroDescInput.value;
 
-    localStorage.setItem('elektro_settings', JSON.stringify(settings));
+    localStorage.setItem('elektro_settings', JSON.stringify(settingsData));
+    updateSettingsUI();
 
     showAlert('Tartalom sikeresen mentve!', 'success');
-    console.log('✅ Tartalom mentve');
 }
 
 function saveContact() {
     console.log('💾 Kapcsolat mentése...');
 
-    const contact = JSON.parse(localStorage.getItem('elektro_contact') || '{}');
-
     const phoneInput = document.getElementById('contact-phone-input');
     const emailInput = document.getElementById('contact-email-input');
     const addressInput = document.getElementById('contact-address-input');
 
-    if (phoneInput) contact.phone = phoneInput.value;
-    if (emailInput) contact.email = emailInput.value;  
-    if (addressInput) contact.address = addressInput.value;
+    if (phoneInput) contactData.phone = phoneInput.value;
+    if (emailInput) contactData.email = emailInput.value;
+    if (addressInput) contactData.address = addressInput.value;
 
-    localStorage.setItem('elektro_contact', JSON.stringify(contact));
+    localStorage.setItem('elektro_contact', JSON.stringify(contactData));
+    updateContactUI();
 
     showAlert('Kapcsolati adatok sikeresen mentve!', 'success');
-    console.log('✅ Kapcsolat mentve');
 }
 
 function saveAppearance() {
     console.log('💾 Megjelenés mentése...');
 
-    const settings = JSON.parse(localStorage.getItem('elektro_settings') || '{}');
-
     const primaryColorInput = document.getElementById('primary-color-input');
     const secondaryColorInput = document.getElementById('secondary-color-input');
 
     if (primaryColorInput) {
-        settings.primaryColor = primaryColorInput.value;
+        settingsData.primaryColor = primaryColorInput.value;
         document.documentElement.style.setProperty('--primary-color', primaryColorInput.value);
     }
 
     if (secondaryColorInput) {
-        settings.secondaryColor = secondaryColorInput.value;
+        settingsData.secondaryColor = secondaryColorInput.value;
         document.documentElement.style.setProperty('--secondary-color', secondaryColorInput.value);
     }
 
-    localStorage.setItem('elektro_settings', JSON.stringify(settings));
+    localStorage.setItem('elektro_settings', JSON.stringify(settingsData));
 
     showAlert('Megjelenés sikeresen frissítve!', 'success');
-    console.log('✅ Megjelenés mentve');
 }
 
 function changePassword() {
@@ -503,13 +1039,11 @@ function changePassword() {
     adminUser.password = newPwd;
     localStorage.setItem('elektro_admin', JSON.stringify(adminUser));
 
-    // Mezők törlése
     currentPassword.value = '';
     newPassword.value = '';
     confirmPassword.value = '';
 
     showAlert('Jelszó sikeresen megváltoztatva!', 'success');
-    console.log('✅ Jelszó megváltoztatva');
 }
 
 // Alert rendszer
@@ -537,7 +1071,7 @@ function showAlert(message, type = 'info') {
 
     const colors = {
         success: '#10b981',
-        error: '#ef4444', 
+        error: '#ef4444',
         warning: '#f59e0b',
         info: '#2563eb'
     };
@@ -556,7 +1090,6 @@ function showAlert(message, type = 'info') {
 
     alert.textContent = message;
 
-    // CSS animáció hozzáadása
     if (!document.querySelector('#alert-styles')) {
         const style = document.createElement('style');
         style.id = 'alert-styles';
@@ -575,7 +1108,6 @@ function showAlert(message, type = 'info') {
 
     alertContainer.appendChild(alert);
 
-    // Automatikus eltüntetés
     setTimeout(() => {
         alert.style.animation = 'slideOutRight 0.3s ease-out forwards';
         setTimeout(() => {
@@ -583,7 +1115,6 @@ function showAlert(message, type = 'info') {
         }, 300);
     }, 5000);
 
-    // Kattintásra eltüntetés
     alert.addEventListener('click', () => {
         alert.style.animation = 'slideOutRight 0.3s ease-out forwards';
         setTimeout(() => {
@@ -592,7 +1123,7 @@ function showAlert(message, type = 'info') {
     });
 }
 
-// Globális funkciók exportálása (backward compatibility)
+// Globális funkciók exportálása
 window.navigateToPage = navigateToPage;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
@@ -605,5 +1136,19 @@ window.saveContact = saveContact;
 window.saveAppearance = saveAppearance;
 window.changePassword = changePassword;
 
-console.log('🚀 Elektro Pro JavaScript betöltve - Admin belépés garantáltan működik!');
-console.log('📋 Teszteléshez: navigálj az Admin oldalra és használd Admin/Admin belépést');
+// Szolgáltatások funkciók
+window.showAddServiceForm = showAddServiceForm;
+window.editService = editService;
+window.saveService = saveService;
+window.cancelServiceEdit = cancelServiceEdit;
+window.deleteService = deleteService;
+
+// Galéria funkciók
+window.showAddGalleryForm = showAddGalleryForm;
+window.editGalleryItem = editGalleryItem;
+window.saveGalleryItem = saveGalleryItem;
+window.cancelGalleryEdit = cancelGalleryEdit;
+window.deleteGalleryItem = deleteGalleryItem;
+
+console.log('🚀 Elektro Pro JavaScript TELJES CRUD verzió betöltve!');
+console.log('📋 Teszteléshez: Admin/Admin belépés után használd a Szolgáltatások és Galéria szekciókat');

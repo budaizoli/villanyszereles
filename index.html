@@ -63,25 +63,8 @@
                         <h2>Szolgáltatásaink</h2>
                         <p>Komplett villanyszerelési megoldások minden igényre</p>
                     </div>
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <div class="service-icon">🏠</div>
-                            <h3>Lakások teljes átvezetékelése</h3>
-                            <p>Komplett lakás villamos hálózat megújítása modern szabványok szerint.</p>
-                            <div class="service-price">Árajánlat kérésre</div>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">📋</div>
-                            <h3>Lakáselosztó kicserélése</h3>
-                            <p>Biztonságos, modern elosztók telepítése FI-védelemmel.</p>
-                            <div class="service-price">45.000 - 120.000 Ft</div>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">🔧</div>
-                            <h3>Kisebb munkák</h3>
-                            <p>Gyors villanyszerelési szolgáltatások, javítások, szerelések.</p>
-                            <div class="service-price">8.000 - 25.000 Ft</div>
-                        </div>
+                    <div class="services-grid" id="services-preview-grid">
+                        <!-- Dinamikusan töltődik JavaScript-ből -->
                     </div>
                     <div class="text-center">
                         <button class="btn btn-primary" onclick="navigateToPage('services')">Összes szolgáltatás</button>
@@ -96,31 +79,8 @@
                         <h2>Munkáink</h2>
                         <p>Válogatás legfrissebb projektjeinkből</p>
                     </div>
-                    <div class="gallery-grid">
-                        <div class="gallery-item" onclick="openLightbox('images/gallery1.jpg', 'Modern lakáselosztó', 'Új, biztonságos lakáselosztó FI-relékkel és automatákkal')">
-                            <div class="gallery-placeholder">
-                                <div class="gallery-icon">⚡</div>
-                                <span>Modern elosztó</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item" onclick="openLightbox('images/gallery2.jpg', 'Teljes átvezetékelés', '60 m² lakás komplett villamos hálózatának megújítása')">
-                            <div class="gallery-placeholder">
-                                <div class="gallery-icon">🔌</div>
-                                <span>Átvezetékelés</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item" onclick="openLightbox('images/gallery3.jpg', 'Design kapcsolók', 'Modern, minőségi kapcsolók és konnektorok')">
-                            <div class="gallery-placeholder">
-                                <div class="gallery-icon">💡</div>
-                                <span>Kapcsolók</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item" onclick="openLightbox('images/gallery4.jpg', 'Kültéri világítás', 'Kerti világítás és kültéri elosztó')">
-                            <div class="gallery-placeholder">
-                                <div class="gallery-icon">🌟</div>
-                                <span>Kültéri munkák</span>
-                            </div>
-                        </div>
+                    <div class="gallery-grid" id="gallery-preview-grid">
+                        <!-- Dinamikusan töltődik JavaScript-ből -->
                     </div>
                     <div class="text-center">
                         <button class="btn btn-outline" onclick="navigateToPage('gallery')">Összes kép</button>
@@ -138,21 +98,21 @@
                                 <div class="contact-icon">📞</div>
                                 <div>
                                     <strong>Telefon</strong>
-                                    <p>+36 30 123 4567</p>
+                                    <p id="contact-phone-display">+36 30 123 4567</p>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <div class="contact-icon">📧</div>
                                 <div>
                                     <strong>Email</strong>
-                                    <p>info@elektropro.hu</p>
+                                    <p id="contact-email-display">info@elektropro.hu</p>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <div class="contact-icon">📍</div>
                                 <div>
                                     <strong>Cím</strong>
-                                    <p>1055 Budapest, Kossuth Lajos tér 12.</p>
+                                    <p id="contact-address-display">1055 Budapest, Kossuth Lajos tér 12.</p>
                                 </div>
                             </div>
                         </div>
@@ -174,102 +134,8 @@
                     <p>Komplett villanyszerelési megoldások minden igényre</p>
                 </div>
 
-                <div class="services-detailed">
-                    <div class="service-detailed">
-                        <div class="service-header">
-                            <div class="service-icon-large">🏠</div>
-                            <div>
-                                <h2>Lakások teljes átvezetékelése</h2>
-                                <p class="service-subtitle">Komplett lakás villamos hálózat megújítása</p>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <p>Teljes körű lakás átvezetékelés a legmodernabb szabványok szerint. Új vezetékek fektetése, elosztó cseréje, minden villamos szerelvény modernizálása. Megfelelünk a 2024-es MSZ szabványoknak és garantáljuk a biztonságos üzemeltetést.</p>
-
-                            <h4>Mit tartalmaz a szolgáltatás:</h4>
-                            <ul>
-                                <li>Új NYM vezetékek fektetése</li>
-                                <li>Modern elosztó telepítése</li>
-                                <li>FI-relé telepítése minden körre</li>
-                                <li>Földelés felülvizsgálata és korszerűsítése</li>
-                                <li>Műszaki átadás teljes dokumentációval</li>
-                                <li>5 év garancia a munkára</li>
-                            </ul>
-
-                            <div class="service-info">
-                                <div class="info-item">
-                                    <strong>Időtartam:</strong> 3-7 nap (lakás méretétől függően)
-                                </div>
-                                <div class="info-item">
-                                    <strong>Ár:</strong> Árajánlat egyedi igények alapján
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-detailed">
-                        <div class="service-header">
-                            <div class="service-icon-large">📋</div>
-                            <div>
-                                <h2>Lakáselosztó kicserélése/létesítése</h2>
-                                <p class="service-subtitle">Biztonságos, modern elosztók telepítése</p>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <p>Régi, elavult elosztók cseréje korszerű, biztonságos megoldásokra. FI-védelem, túláramvédelem és megfelelő címkézés biztosítása. Minden elosztó egyedi tervezés alapján készül.</p>
-
-                            <h4>Mit tartalmaz a szolgáltatás:</h4>
-                            <ul>
-                                <li>Moduláris elosztó szekrény</li>
-                                <li>Digitális mérőóra hely kialakítása</li>
-                                <li>FI-relék minden körre</li>
-                                <li>Túláramvédő automaták</li>
-                                <li>Szakszerű címkézés</li>
-                                <li>Villámvédelem (opcionális)</li>
-                            </ul>
-
-                            <div class="service-info">
-                                <div class="info-item">
-                                    <strong>Időtartam:</strong> 1-2 nap
-                                </div>
-                                <div class="info-item">
-                                    <strong>Ár:</strong> 45.000 - 120.000 Ft
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-detailed">
-                        <div class="service-header">
-                            <div class="service-icon-large">🔧</div>
-                            <div>
-                                <h2>Kisebb munkák és javítások</h2>
-                                <p class="service-subtitle">Gyors villanyszerelési szolgáltatások</p>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <p>Gyors és megbízható kisebb villanyszerelési munkák. Konnektorok, kapcsolók, lámpák szerelése és javítása. Hibaelhárítás és rendszeres karbantartás magánszemélyek és irodák számára.</p>
-
-                            <h4>Mit tartalmaz a szolgáltatás:</h4>
-                            <ul>
-                                <li>Konnektorok szerelése és cseréje</li>
-                                <li>Kapcsolók telepítése</li>
-                                <li>Lámpa szerelés és javítás</li>
-                                <li>Hibaelhárítás és diagnosztika</li>
-                                <li>Sürgősségi szolgáltatás (24/7)</li>
-                                <li>Rendszeres karbantartás</li>
-                            </ul>
-
-                            <div class="service-info">
-                                <div class="info-item">
-                                    <strong>Időtartam:</strong> 2-4 óra
-                                </div>
-                                <div class="info-item">
-                                    <strong>Ár:</strong> 8.000 - 25.000 Ft
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="services-detailed" id="services-detailed">
+                    <!-- Dinamikusan töltődik JavaScript-ből -->
                 </div>
 
                 <div class="cta-section">
@@ -288,66 +154,8 @@
                     <p>Válogatás legfrissebb projektjeinkből és referenciáinkból</p>
                 </div>
 
-                <div class="gallery-full">
-                    <div class="gallery-item" onclick="openLightbox('images/gallery1.jpg', 'Modern lakáselosztó', 'Új, biztonságos lakáselosztó FI-relékkel és automatákkal - XIII. kerületi lakás felújítás')">
-                        <div class="gallery-placeholder">
-                            <div class="gallery-icon">⚡</div>
-                            <div class="gallery-info">
-                                <h3>Modern lakáselosztó</h3>
-                                <p>XIII. kerületi lakás</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openLightbox('images/gallery2.jpg', 'Teljes átvezetékelés', '60 m² lakás komplett villamos hálózatának megújítása modern NYM vezetékekkel')">
-                        <div class="gallery-placeholder">
-                            <div class="gallery-icon">🔌</div>
-                            <div class="gallery-info">
-                                <h3>Teljes átvezetékelés</h3>
-                                <p>60 m² panellakás</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openLightbox('images/gallery3.jpg', 'Design kapcsolók', 'Modern, minőségi kapcsolók és konnektorok szerelése irodaház felújítás során')">
-                        <div class="gallery-placeholder">
-                            <div class="gallery-icon">💡</div>
-                            <div class="gallery-info">
-                                <h3>Design kapcsolók</h3>
-                                <p>Irodaház felújítás</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openLightbox('images/gallery4.jpg', 'Kültéri világítás', 'Kerti világítás és kültéri elosztó kialakítása családi háznál')">
-                        <div class="gallery-placeholder">
-                            <div class="gallery-icon">🌟</div>
-                            <div class="gallery-info">
-                                <h3>Kültéri világítás</h3>
-                                <p>Családi ház - kert</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openLightbox('images/gallery5.jpg', 'Ipari elektromos munkák', 'Nagyobb teljesítményű ipari kapcsolások és motorindítók műhelyben')">
-                        <div class="gallery-placeholder">
-                            <div class="gallery-icon">🏭</div>
-                            <div class="gallery-info">
-                                <h3>Ipari elektromos</h3>
-                                <p>Műhely felszerelés</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" onclick="openLightbox('images/gallery6.jpg', 'Sürgős hibaelhárítás', 'Villamos hibák gyors és hatékony elhárítása 24/7 ügyeleti szolgáltatással')">
-                        <div class="gallery-placeholder">
-                            <div class="gallery-icon">🚨</div>
-                            <div class="gallery-info">
-                                <h3>Hibaelhárítás</h3>
-                                <p>24/7 ügyelet</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="gallery-full" id="gallery-full">
+                    <!-- Dinamikusan töltődik JavaScript-ből -->
                 </div>
 
                 <div class="testimonials">
@@ -390,7 +198,7 @@
                                 <div class="contact-icon-large">📞</div>
                                 <div>
                                     <h3>Telefon</h3>
-                                    <p class="contact-value">+36 30 123 4567</p>
+                                    <p class="contact-value" id="contact-phone-full">+36 30 123 4567</p>
                                     <small>Hétfő-Péntek: 8:00-18:00<br>Szombat: 9:00-15:00</small>
                                 </div>
                             </div>
@@ -399,7 +207,7 @@
                                 <div class="contact-icon-large">📧</div>
                                 <div>
                                     <h3>Email</h3>
-                                    <p class="contact-value">info@elektropro.hu</p>
+                                    <p class="contact-value" id="contact-email-full">info@elektropro.hu</p>
                                     <small>24 órán belül válaszolunk</small>
                                 </div>
                             </div>
@@ -408,7 +216,7 @@
                                 <div class="contact-icon-large">📍</div>
                                 <div>
                                     <h3>Cím</h3>
-                                    <p class="contact-value">1055 Budapest,<br>Kossuth Lajos tér 12.</p>
+                                    <p class="contact-value" id="contact-address-full">1055 Budapest,<br>Kossuth Lajos tér 12.</p>
                                     <small>Előzetes egyeztetés alapján</small>
                                 </div>
                             </div>
@@ -551,7 +359,7 @@
                             <div class="stat-card">
                                 <div class="stat-icon">🛠️</div>
                                 <div class="stat-content">
-                                    <h3>3</h3>
+                                    <h3 id="services-count">0</h3>
                                     <p>Szolgáltatás</p>
                                 </div>
                             </div>
@@ -559,7 +367,7 @@
                             <div class="stat-card">
                                 <div class="stat-icon">🖼️</div>
                                 <div class="stat-content">
-                                    <h3>6</h3>
+                                    <h3 id="gallery-count">0</h3>
                                     <p>Galéria kép</p>
                                 </div>
                             </div>
@@ -585,8 +393,8 @@
                             <h2>Gyors műveletek</h2>
                             <div class="action-buttons">
                                 <button class="btn btn-primary" onclick="showAdminSection('content')">📝 Tartalom szerkesztése</button>
-                                <button class="btn btn-primary" onclick="showAdminSection('services')">🛠️ Szolgáltatás hozzáadása</button>
-                                <button class="btn btn-primary" onclick="showAdminSection('gallery')">🖼️ Kép feltöltése</button>
+                                <button class="btn btn-primary" onclick="showAdminSection('services')">🛠️ Szolgáltatások kezelése</button>
+                                <button class="btn btn-primary" onclick="showAdminSection('gallery')">🖼️ Galéria kezelése</button>
                                 <button class="btn btn-primary" onclick="showAdminSection('appearance')">🎨 Megjelenés</button>
                             </div>
                         </div>
@@ -628,9 +436,58 @@
                             <p>Szolgáltatások hozzáadása, szerkesztése és törlése</p>
                         </div>
 
-                        <div class="admin-message">
-                            <div class="message-info">
-                                <strong>ℹ️ Információ:</strong> A szolgáltatások kezelése demo módban működik. Az éles verzióban itt tudja szerkeszteni a szolgáltatásokat.
+                        <div class="admin-actions">
+                            <button class="btn btn-primary" onclick="showAddServiceForm()">+ Új szolgáltatás</button>
+                        </div>
+
+                        <!-- Add/Edit Service Form -->
+                        <div id="service-form-container" class="admin-form-container" style="display: none;">
+                            <h3 id="service-form-title">Új szolgáltatás hozzáadása</h3>
+                            <form class="admin-form" id="service-form">
+                                <input type="hidden" id="service-id" value="">
+
+                                <div class="form-group">
+                                    <label for="service-name">Szolgáltatás neve *</label>
+                                    <input type="text" id="service-name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="service-short">Rövid leírás *</label>
+                                    <input type="text" id="service-short" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="service-description">Részletes leírás *</label>
+                                    <textarea id="service-description" rows="4" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="service-icon">Ikon (emoji)</label>
+                                    <input type="text" id="service-icon" placeholder="🔧" maxlength="2">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="service-price">Ár</label>
+                                        <input type="text" id="service-price" placeholder="pl. 45.000 - 120.000 Ft">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="service-duration">Időtartam</label>
+                                        <input type="text" id="service-duration" placeholder="pl. 1-2 nap">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary" onclick="saveService()">Mentés</button>
+                                    <button type="button" class="btn btn-outline" onclick="cancelServiceEdit()">Mégse</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Services List -->
+                        <div class="admin-list-container">
+                            <div id="services-list" class="admin-list">
+                                <!-- Dinamikusan töltődik JavaScript-ből -->
                             </div>
                         </div>
                     </div>
@@ -642,9 +499,60 @@
                             <p>Képek feltöltése, szerkesztése és törlése</p>
                         </div>
 
-                        <div class="admin-message">
-                            <div class="message-info">
-                                <strong>ℹ️ Információ:</strong> A képfeltöltés demo módban működik. Az éles verzióban itt tudja kezelni a galéria képeket.
+                        <div class="admin-actions">
+                            <button class="btn btn-primary" onclick="showAddGalleryForm()">+ Új kép hozzáadása</button>
+                        </div>
+
+                        <!-- Add/Edit Gallery Item Form -->
+                        <div id="gallery-form-container" class="admin-form-container" style="display: none;">
+                            <h3 id="gallery-form-title">Új kép hozzáadása</h3>
+                            <form class="admin-form" id="gallery-form">
+                                <input type="hidden" id="gallery-id" value="">
+
+                                <div class="form-group">
+                                    <label for="gallery-title">Cím *</label>
+                                    <input type="text" id="gallery-title" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gallery-description">Leírás *</label>
+                                    <textarea id="gallery-description" rows="3" required></textarea>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="gallery-category">Kategória</label>
+                                        <select id="gallery-category">
+                                            <option value="elosztok">Elosztók</option>
+                                            <option value="atvezetekeles">Átvezetékelés</option>
+                                            <option value="szerelveny">Szerelvények</option>
+                                            <option value="kulteri">Kültéri</option>
+                                            <option value="ipari">Ipari</option>
+                                            <option value="hibas">Hibaelhárítás</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gallery-icon">Ikon (emoji)</label>
+                                        <input type="text" id="gallery-icon" placeholder="⚡" maxlength="2">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gallery-project">Projekt neve</label>
+                                    <input type="text" id="gallery-project" placeholder="pl. XIII. kerületi lakás felújítás">
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary" onclick="saveGalleryItem()">Mentés</button>
+                                    <button type="button" class="btn btn-outline" onclick="cancelGalleryEdit()">Mégse</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Gallery List -->
+                        <div class="admin-list-container">
+                            <div id="gallery-list" class="admin-list gallery-admin-list">
+                                <!-- Dinamikusan töltődik JavaScript-ből -->
                             </div>
                         </div>
                     </div>
@@ -694,7 +602,7 @@
 
                                 <div class="form-group">
                                     <label>Második szín</label>
-                                    <input type="color" id="secondary-color-input" value="#ffffff">
+                                    <input type="color" id="secondary-color-input" value="#1e40af">
                                 </div>
 
                                 <button type="button" class="btn btn-primary" onclick="saveAppearance()">Megjelenés mentése</button>
@@ -761,18 +669,15 @@
 
                 <div class="footer-contact">
                     <h4>Kapcsolat</h4>
-                    <p>📞 +36 30 123 4567</p>
-                    <p>📧 info@elektropro.hu</p>
-                    <p>📍 Budapest, Kossuth Lajos tér 12.</p>
+                    <p id="footer-phone">📞 +36 30 123 4567</p>
+                    <p id="footer-email">📧 info@elektropro.hu</p>
+                    <p id="footer-address">📍 Budapest, Kossuth Lajos tér 12.</p>
                 </div>
 
                 <div class="footer-services">
                     <h4>Szolgáltatások</h4>
-                    <ul>
-                        <li>Lakás átvezetékelése</li>
-                        <li>Elosztó csere</li>
-                        <li>Kisebb munkák</li>
-                        <li>24/7 hibaelhárítás</li>
+                    <ul id="footer-services-list">
+                        <!-- Dinamikusan töltődik JavaScript-ből -->
                     </ul>
                 </div>
             </div>
