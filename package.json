@@ -1,0 +1,13 @@
+{
+  "name": "elektro-pro-weboldal",
+  "version": "1.0.0",
+  "description": "Elektro Pro Bt. villanyszerelési weboldal",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": ["weboldal", "villanyszerelés", "admin", "responsive"],
+  "author": "Elektro Pro Bt.",
+  "license": "MIT"
+}
